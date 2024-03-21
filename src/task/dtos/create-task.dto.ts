@@ -2,6 +2,7 @@ import { Types } from 'mongoose';
 import { TaskStatus } from '../task.schema';
 import { IsEnum, IsString } from 'class-validator';
 import { IsObjectId } from 'src/decorators/is-object-id';
+import { PartialType } from '@nestjs/mapped-types';
 
 export class CreateTaskDto {
   @IsString()
@@ -13,3 +14,5 @@ export class CreateTaskDto {
   @IsObjectId()
   user: Types.ObjectId;
 }
+
+export class UpdateTaskDto extends PartialType(CreateTaskDto) {}

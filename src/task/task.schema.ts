@@ -8,7 +8,7 @@ export enum TaskStatus {
 
 @Schema()
 export class TaskModel extends Document {
-  @Prop({ required: true })
+  @Prop()
   content: string;
 
   @Prop({ required: true })

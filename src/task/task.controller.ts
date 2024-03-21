@@ -1,6 +1,7 @@
 import {
   Body,
   Controller,
+  Delete,
   Get,
   Param,
   Post,
@@ -8,9 +9,10 @@ import {
   UseGuards,
 } from '@nestjs/common';
 import { TaskService } from './task.service';
-import { CreateTaskDto } from './dtos/create-task.dto';
+import { CreateTaskDto, UpdateTaskDto } from './dtos/create-task.dto';
 import { Task } from './interfaces';
 import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
+import { Types } from 'mongoose';
 
 @UseGuards(JwtAuthGuard)
 @Controller('task')
@@ -25,17 +27,18 @@ export class TaskController {
 
   @Post('create')
   async createTask(@Body() createTaskDto: CreateTaskDto): Promise<Task> {
-    console.log(createTaskDto);
     return this.taskService.createTask(createTaskDto);
   }
 
-  @Post('update')
-  async updateTask(@Body() updateTaskDto: CreateTaskDto): Promise<Task> {
-    console.log(updateTaskDto);
-    return this.taskService.updateTask(updateTaskDto);
+  @Post('update/:id')
+  async updateTask(
+    @Param('id') id: Types.ObjectId,
+    @Body() updateTaskDto: UpdateTaskDto,
+  ): Promise<Task> {
+    return this.taskService.updateTask(id, updateTaskDto);
   }
 
-  @Post('delete/:id')
+  @Delete('delete/:id')
   async deleteTask(@Param('id') id: string): Promise<Task> {
     return this.taskService.deleteTask(id);
   }
