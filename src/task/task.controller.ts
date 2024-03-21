@@ -32,7 +32,7 @@ export class TaskController {
 
   @Post('update/:id')
   async updateTask(
-    @Param('id') id: Types.ObjectId,
+    @Param('id') id: string,
     @Body() updateTaskDto: UpdateTaskDto,
   ): Promise<Task> {
     return this.taskService.updateTask(id, updateTaskDto);

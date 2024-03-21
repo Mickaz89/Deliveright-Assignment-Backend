@@ -19,10 +19,7 @@ export class TaskService {
     return task.save();
   }
 
-  async updateTask(
-    id: Types.ObjectId,
-    updateTaskDto: UpdateTaskDto,
-  ): Promise<Task> {
+  async updateTask(id: string, updateTaskDto: UpdateTaskDto): Promise<Task> {
     const { content, status } = updateTaskDto;
     const task = await this.taskModel.findOne({ _id: id });
     task.status = status;
