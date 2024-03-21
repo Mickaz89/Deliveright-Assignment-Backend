@@ -1,4 +1,4 @@
-import { Injectable, UnauthorizedException } from '@nestjs/common';
+import { BadRequestException, Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
@@ -31,7 +31,7 @@ export class AuthService {
       user.password,
     );
     if (!userInDb) {
-      throw new UnauthorizedException();
+      throw new BadRequestException('Invalid credentials');
     }
     const { username, _id } = userInDb;
     const payload = { username, id: _id };
@@ -41,6 +41,10 @@ export class AuthService {
   }
 
   async register(username: string, password: string, name: string) {
+    const user = await this.userModel.findOne({ username });
+    if (user) {
+      throw new BadRequestException('Username already exists');
+    }
     const hashedPassword = await this.hashPassword(password);
     const newUser = new this.userModel({
       username,

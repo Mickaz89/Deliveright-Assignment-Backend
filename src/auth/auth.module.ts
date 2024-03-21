@@ -10,8 +10,8 @@ import { JwtStrategy } from 'src/strategies/jwt.strategy';
   imports: [
     PassportModule,
     JwtModule.register({
-      secret: 'secretKey', // replace with your own secret key
-      signOptions: { expiresIn: '1d' }, // token expiration time
+      secret: 'secretKey',
+      signOptions: { expiresIn: '1d' },
     }),
     MongooseModule.forFeature([{ name: 'User', schema: UserSchema }]),
   ],
