@@ -34,8 +34,8 @@ export class AuthService {
     if (!userInDb) {
       throw new BadRequestException('Invalid credentials');
     }
-    const { username, _id } = userInDb;
-    const payload = { username, id: _id };
+    const { name, _id } = userInDb;
+    const payload = { name, id: _id };
     return {
       access_token: this.jwtService.sign(payload),
     };

@@ -1,8 +1,8 @@
 import { Types } from 'mongoose';
 import { TaskStatus } from '../task.schema';
 import { IsEnum, IsString } from 'class-validator';
-import { IsObjectId } from 'src/decorators/is-object-id';
 import { PartialType } from '@nestjs/mapped-types';
+import { IsObjectId } from '../../decorators/is-object-id.decorator';
 
 export class CreateTaskDto {
   @IsString()

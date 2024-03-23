@@ -11,8 +11,7 @@ import {
 import { TaskService } from './task.service';
 import { CreateTaskDto, UpdateTaskDto } from './dtos/create-task.dto';
 import { Task } from './interfaces';
-import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
-import { Types } from 'mongoose';
+import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 
 @UseGuards(JwtAuthGuard)
 @Controller('task')

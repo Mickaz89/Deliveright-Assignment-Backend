@@ -11,10 +11,10 @@ export class TaskModel extends Document {
   @Prop()
   content: string;
 
-  @Prop({ required: true })
+  @Prop()
   status: TaskStatus;
 
-  @Prop({ type: Types.ObjectId, ref: 'User', required: true })
+  @Prop({ type: Types.ObjectId, ref: 'User' })
   user: Types.ObjectId;
 }
 
