@@ -13,9 +13,13 @@ export class TaskService {
     return this.taskModel.find({ user }).sort({ status: -1 }).exec();
   }
 
-  async createTask(createTaskDto: CreateTaskDto): Promise<Task> {
-    const { content, status, user } = createTaskDto;
-    const task = new this.taskModel({ content, status, user });
+  async createTask(
+    createTaskDto: CreateTaskDto,
+    userId: Types.ObjectId,
+  ): Promise<Task> {
+    const { content, status } = createTaskDto;
+    console.log('userId', userId);
+    const task = new this.taskModel({ content, status, user: userId });
     return task.save();
   }
 

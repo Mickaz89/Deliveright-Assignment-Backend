@@ -52,7 +52,7 @@ export class AuthService {
       password: hashedPassword,
       name,
     });
-    newUser.save();
+    await newUser.save();
     return this.login({ username, password });
   }
 }

@@ -25,8 +25,12 @@ export class TaskController {
   }
 
   @Post('create')
-  async createTask(@Body() createTaskDto: CreateTaskDto): Promise<Task> {
-    return this.taskService.createTask(createTaskDto);
+  async createTask(
+    @Request() req,
+    @Body() createTaskDto: CreateTaskDto,
+  ): Promise<Task> {
+    const userId = req.user.id;
+    return this.taskService.createTask(createTaskDto, userId);
   }
 
   @Post('update/:id')
